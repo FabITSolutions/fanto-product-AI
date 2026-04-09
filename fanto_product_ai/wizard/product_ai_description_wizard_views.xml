@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="product_ai_description_wizard_form" model="ir.ui.view">
+        <field name="name">product.ai.description.wizard.form</field>
+        <field name="model">product.ai.description.wizard</field>
+        <field name="arch" type="xml">
+            <form string="AI Product Description Generator">
+
+                <!-- ── CONFIGURE STATE ── -->
+                <group invisible="state == 'preview'">
+                    <group string="Product">
+                        <field name="product_name" readonly="1"/>
+                        <field name="product_categ" readonly="1"/>
+                    </group>
+                    <group string="Generation Options">
+                        <field name="provider" widget="radio"/>
+                        <field name="language"/>
+                        <field name="tone"/>
+                    </group>
+                    <group string="Additional Context (optional)" colspan="2">
+                        <field name="extra_context"
+                               nolabel="1"
+                               placeholder="e.g. Highlight eco-friendly materials, mention 2-year warranty, avoid technical jargon..."/>
+                    </group>
+                </group>
+
+                <!-- ── PREVIEW STATE ── -->
+                <group invisible="state == 'draft'">
+                    <group string="Generated Description Preview" colspan="2">
+                        <field name="generated_html"
+                               nolabel="1"
+                               widget="html"
+                               style="min-height:200px;"/>
+                    </group>
+                    <div class="alert alert-info" role="alert" colspan="2">
+                        <i class="fa fa-info-circle"/> Review the description above. Click
+                        <strong>Save to Product</strong> to apply it, or
+                        <strong>Regenerate</strong> to go back and adjust options.
+                    </div>
+                </group>
+
+                <!-- hidden fields needed for state tracking -->
+                <field name="state" invisible="1"/>
+                <field name="product_id" invisible="1"/>
+
+                <footer>
+                    <!-- Draft state buttons -->
+                    <button name="action_generate"
+                            string="Generate Description"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state == 'preview'"/>
+                    <button string="Cancel"
+                            class="btn-secondary"
+                            special="cancel"
+                            invisible="state == 'preview'"/>
+
+                    <!-- Preview state buttons -->
+                    <button name="action_save"
+                            string="Save to Product"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state == 'draft'"/>
+                    <button name="action_regenerate"
+                            string="Regenerate"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state == 'draft'"/>
+                    <button string="Close"
+                            class="btn-secondary"
+                            special="cancel"
+                            invisible="state == 'draft'"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open wizard -->
+    <record id="action_product_ai_description_wizard" model="ir.actions.act_window">
+        <field name="name">Generate AI Description</field>
+        <field name="res_model">product.ai.description.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{
+            'default_product_id': active_id,
+        }</field>
+    </record>
+
+</odoo>
