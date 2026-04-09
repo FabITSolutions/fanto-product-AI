@@ -19,6 +19,9 @@
         "wizard/product_ai_description_wizard_views.xml",
         "views/product_views.xml",
     ],
+    'images': [
+        'static/description/banner.png',
+    ],
     "installable": True,
     "application": False,
     "license": "LGPL-3",
