@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_fanto_ai" model="ir.ui.view">
+        <field name="name">res.config.settings.view.fanto.ai</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Fanto AI" string="Fanto AI" name="fanto_product_ai" groups="base.group_system">
+
+                    <block title="AI Provider" id="fanto_ai_provider_block">
+                        <setting string="Default AI Provider"
+                                 help="Which provider is pre-selected when opening the description wizard.">
+                            <field name="fanto_ai_provider" widget="radio"/>
+                        </setting>
+                    </block>
+
+                    <block title="Groq (Free - Recommended)" id="fanto_groq_block">
+                        <setting string="API Key"
+                                 help="Free tier available. Get key at console.groq.com (no credit card).">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_groq_api_key"/>
+                                    <field name="fanto_groq_api_key"
+                                           password="True"
+                                           placeholder="gsk_..."/>
+                                </div>
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_groq_model"/>
+                                    <field name="fanto_groq_model"
+                                           placeholder="llama-3.3-70b-versatile"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+
+                    <block title="Ollama (Free)" id="fanto_ollama_block">
+                        <setting string="API Key"
+                                 help="Get key at ollama.com (cloud API).">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_ollama_api_key"/>
+                                    <field name="fanto_ollama_api_key"
+                                           password="True"
+                                           placeholder="ollama_..."/>
+                                </div>
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_ollama_model"/>
+                                    <field name="fanto_ollama_model"
+                                           placeholder="llama3.2"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+
+                    <block title="Anthropic (Claude)" id="fanto_anthropic_block">
+                        <setting string="API Key"
+                                 help="Your Anthropic API key. Get it at console.anthropic.com.">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_anthropic_api_key"/>
+                                    <field name="fanto_anthropic_api_key"
+                                           password="True"
+                                           placeholder="sk-ant-..."/>
+                                </div>
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_anthropic_model"/>
+                                    <field name="fanto_anthropic_model"
+                                           placeholder="claude-sonnet-4-20250514"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+
+                    <block title="OpenAI (GPT-4)" id="fanto_openai_block">
+                        <setting string="API Key"
+                                 help="Your OpenAI API key. Get it at platform.openai.com.">
+                            <div class="content-group">
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_openai_api_key"/>
+                                    <field name="fanto_openai_api_key"
+                                           password="True"
+                                           placeholder="sk-..."/>
+                                </div>
+                                <div class="row mt8">
+                                    <label class="col-lg-3 o_light_label" for="fanto_openai_model"/>
+                                    <field name="fanto_openai_model"
+                                           placeholder="gpt-4o"/>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
